@@ -81,6 +81,7 @@ def verify():
 def webhook_get():
     return verify()
 
+@signature_required
 @webhook_blueprint.route("/webhook", methods=["POST"])
 def webhook_post():
     return handle_message()
