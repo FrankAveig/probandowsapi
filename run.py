@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 from app import create_app
 from start.whatsapp_quickstart import send_whatsapp_message, get_text_message_input, send_message
+from flask import current_app
 
 load_dotenv()
 RECIPIENT_WAID = os.getenv("RECIPIENT_WAID")
@@ -13,7 +14,8 @@ CORS(app)
 
 @app.route("/")
 def home():
-    return "<p>server is up!</p>"
+    verify_token = current_app.config["VERIFY_TOKEN"]
+    return f"<p>server is up!{ verify_token }</p>"
 
 @app.route("/hello")
 def template_message():
